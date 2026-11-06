@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wyprzedaż magazynowa – Edyta Sklep z częściami rolniczymi</title>
+<meta name="description" content="Likwidacja pozostałości magazynowych sklepu Edyta. Części do Ursus C-330, C-360, Zetor, T-25 i innych maszyn rolniczych w okazyjnych cenach do negocjacji.">
+<meta name="theme-color" content="#1f3d2b">
+<style>
+  :root{
+    --green:#1f3d2b;
+    --green-2:#2e5a3f;
+    --dark:#1c1f1d;
+    --gray:#5b625d;
+    --light:#f4f2ec;
+    --white:#ffffff;
+    --accent:#e8a317;
+    --accent-dark:#b97f0a;
+    --border:#dedad0;
+    --radius:12px;
+    --font:"Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);color:var(--dark);background:var(--light);line-height:1.6}
+  a{color:inherit}
+  img{max-width:100%}
+  .container{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+  /* Top bar */
+  .topbar{background:var(--dark);color:#e7e5df;font-size:.875rem}
+  .topbar .container{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+  .topbar a{text-decoration:none;font-weight:600;color:var(--accent)}
+
+  header.site{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
+  header.site .container{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;color:var(--green);line-height:1.2}
+  .brand-mark{width:38px;height:38px;border-radius:8px;background:var(--green);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:1.1rem;flex-shrink:0}
+  .brand small{display:block;font-weight:500;color:var(--gray);font-size:.75rem}
+  nav.main ul{display:flex;gap:24px;list-style:none}
+  nav.main a{text-decoration:none;font-weight:500;color:var(--dark)}
+  nav.main a:hover{color:var(--green-2)}
+  @media (max-width:760px){nav.main{display:none}}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:background .2s,transform .1s,border-color .2s;font-family:inherit}
+  .btn:active{transform:translateY(1px)}
+  .btn-accent{background:var(--accent);color:var(--dark)}
+  .btn-accent:hover{background:#f2b43a}
+  .btn-outline{border-color:rgba(255,255,255,.6);color:var(--white);background:transparent}
+  .btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+  .btn-green{background:var(--green);color:var(--white)}
+  .btn-green:hover{background:var(--green-2)}
+  .btn-sm{padding:10px 16px;font-size:.9rem}
+  .btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+  /* Hero */
+  .hero{background:
+      linear-gradient(135deg,rgba(20,40,28,.96),rgba(31,61,43,.92)),
+      repeating-linear-gradient(45deg,#2a4a36 0 2px,transparent 2px 22px);
+    color:var(--white);padding:80px 0 88px}
+  .hero .tag{display:inline-block;background:var(--accent);color:var(--dark);font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:6px;margin-bottom:20px}
+  .hero h1{font-size:clamp(1.9rem,5vw,3.25rem);line-height:1.15;max-width:820px;text-wrap:balance}
+  .hero h1 span{color:var(--accent)}
+  .hero p.lead{margin-top:20px;font-size:clamp(1.05rem,2vw,1.25rem);max-width:680px;color:#dfe8e1;text-wrap:pretty}
+  .hero .actions{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+  .hero .facts{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:720px}
+  .fact{border-left:3px solid var(--accent);padding-left:14px}
+  .fact strong{display:block;font-size:1.4rem}
+  .fact span{font-size:.9rem;color:#c6d3ca}
+  @media (max-width:560px){.hero{padding:56px 0 64px}.hero .facts{grid-template-columns:1fr}}
+
+  /* Banner */
+  .banner{background:var(--accent);color:var(--dark)}
+  .banner .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px;flex-wrap:wrap}
+  .banner p{font-weight:600;font-size:1.05rem;max-width:760px}
+  .banner .btn{background:var(--dark);color:var(--white)}
+  .banner .btn:hover{background:#000}
+
+  section{padding:72px 0}
+  .section-head{max-width:680px;margin-bottom:36px}
+  .eyebrow{color:var(--green-2);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}
+  .section-head h2{font-size:clamp(1.6rem,3.5vw,2.25rem);line-height:1.2;margin-top:6px;text-wrap:balance}
+  .section-head p{color:var(--gray);margin-top:10px}
+
+  /* Categories */
+  .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  .cat{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:10px;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:border-color .2s,box-shadow .2s,transform .2s}
+  .cat:hover{border-color:var(--green-2);box-shadow:0 8px 24px rgba(31,61,43,.1);transform:translateY(-2px)}
+  .cat .ico{width:44px;height:44px;border-radius:10px;background:#e5eee8;color:var(--green);display:grid;place-items:center}
+  .cat .ico svg{width:24px;height:24px}
+  .cat h3{font-size:1.1rem}
+  .cat p{color:var(--gray);font-size:.95rem}
+  .cat .more{margin-top:auto;font-weight:600;color:var(--green-2);font-size:.9rem}
+
+  /* Parts table */
+  #czesci{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:16px}
+  @media (max-width:760px){.filters{grid-template-columns:1fr}}
+  .field label{display:block;font-weight:600;font-size:.875rem;margin-bottom:6px}
+  input,select,textarea{width:100%;padding:12px 14px;border:1px solid #c9c4b7;border-radius:10px;font:inherit;font-size:1rem;background:var(--white);color:var(--dark)}
+  textarea{min-height:120px;resize:vertical}
+  .search-wrap{position:relative}
+  .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--gray);pointer-events:none}
+  .search-wrap input{padding-left:40px}
+  .result-info{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:var(--gray);font-size:.9rem;margin-bottom:12px}
+  .link-btn{background:none;border:none;color:var(--green-2);font:inherit;font-weight:600;cursor:pointer;text-decoration:underline}
+
+  .table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  thead th{background:var(--green);color:var(--white);text-align:left;padding:12px 14px;font-weight:600;white-space:nowrap}
+  tbody td{padding:12px 14px;border-top:1px solid var(--border);vertical-align:middle}
+  tbody tr:nth-child(even){background:#faf9f5}
+  .code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;color:var(--gray)}
+  .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.78rem;font-weight:700;white-space:nowrap}
+  .b-ok{background:#e1efe5;color:#1f5a33}
+  .b-low{background:#fdf0d4;color:#8a5a00}
+  .price{font-weight:700;white-space:nowrap}
+  .price small{display:block;font-weight:500;color:var(--gray);font-size:.75rem}
+  .empty{padding:32px;text-align:center;color:var(--gray)}
+
+  @media (max-width:760px){
+    .table-wrap{border:none;overflow:visible}
+    table,thead,tbody,tr,td{display:block}
+    thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+    tbody tr{background:var(--white)!important;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;padding:8px 4px}
+    tbody td{border:none;display:flex;justify-content:space-between;gap:16px;padding:8px 12px;text-align:right}
+    tbody td::before{content:attr(data-label);font-weight:600;color:var(--gray);text-align:left}
+    tbody td.name{font-weight:700;font-size:1.02rem;display:block;text-align:left}
+    tbody td.name::before{display:none}
+    tbody td.act{display:block}
+    tbody td.act::before{display:none}
+    tbody td.act .btn{width:100%}
+  }
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:48px}
+  @media (max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;position:relative}
+  .step .num{width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--dark);font-weight:800;display:grid;place-items:center;margin-bottom:12px}
+  .step h3{font-size:1.1rem;margin-bottom:6px}
+  .step p{color:var(--gray);font-size:.95rem}
+
+  .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:start}
+  @media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+  .call-card{background:var(--green);color:var(--white);border-radius:var(--radius);padding:32px}
+  .call-card h3{font-size:1.25rem}
+  .call-card p{color:#cfdcd3;margin-top:6px}
+  .phone{display:block;margin:20px 0;font-size:clamp(1.8rem,5vw,2.4rem);font-weight:800;color:var(--accent);text-decoration:none;line-height:1.1;word-break:break-word}
+  .call-card .btns{display:flex;flex-direction:column;gap:10px}
+  .btn-wa{background:#25d366;color:#0b2e17}
+  .btn-wa:hover{background:#3be07a}
+  .hours{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:.92rem;color:#cfdcd3}
+  .hours strong{color:var(--white)}
+
+  form.inquiry{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px;display:grid;gap:16px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:560px){.row2{grid-template-columns:1fr}}
+  .req{color:#b3261e}
+  .form-note{font-size:.85rem;color:var(--gray)}
+  .form-msg{display:none;padding:14px;border-radius:10px;font-weight:600}
+  .form-msg.ok{display:block;background:#e1efe5;color:#1f5a33}
+  .form-msg.err{display:block;background:#fbe3e1;color:#8c1d18}
+  .form-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+  footer{background:var(--dark);color:#bdbfba;padding:40px 0;font-size:.92rem}
+  footer .container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer strong{color:var(--white)}
+
+  .float-call{position:fixed;right:16px;bottom:16px;z-index:30;display:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  @media (max-width:760px){.float-call{display:inline-flex}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span>Wyprzedaż prywatna – ceny do negocjacji</span>
+    <span>Tel.: <a href="#" class="js-phone-link js-phone-text">[Wpisz swój numer]</a></span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="container">
+    <a href="#top" class="brand" aria-label="Edyta – strona główna">
+      <span class="brand-mark" aria-hidden="true">E</span>
+      <span>Edyta<small>Sklep z częściami rolniczymi</small></span>
+    </a>
+    <nav class="main" aria-label="Menu główne">
+      <ul>
+        <li><a href="#kategorie">Kategorie</a></li>
+        <li><a href="#czesci">Lista części</a></li>
+        <li><a href="#kontakt">Jak zamówić</a></li>
+      </ul>
+    </nav>
+    <a href="#kontakt" class="btn btn-green btn-sm">Zapytaj o część</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <span class="tag">Likwidacja magazynu</span>
+      <h1 id="hero-title">Wielka Wyprzedaż Magazynowa – <span>Części do Starszych Ciągników</span> i Maszyn Rolniczych</h1>
+      <p class="lead">Likwidacja pozostałości magazynowych sklepu „Edyta”. Ostatnie sztuki fabrycznie nowych i zapasowych części w atrakcyjnych cenach!</p>
+      <div class="actions">
+        <a href="#czesci" class="btn btn-accent">Zobacz ofertę</a>
+        <a href="#kontakt" class="btn btn-outline">Skontaktuj się</a>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>Ursus · Zetor · T-25</strong><span>C-330, C-360, C-385 i inne</span></div>
+        <div class="fact"><strong>Ceny do negocjacji</strong><span>Okazyjne, z prywatnego magazynu</span></div>
+        <div class="fact"><strong>Wysyłka lub odbiór</strong><span>Kurierem w całej Polsce</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="banner" role="note">
+    <div class="container">
+      <p>Sprzedaż pozostałości z prywatnego magazynu. Ogromny wybór części do Ursus, Zetor i innych! Zadzwoń i zapytaj o swoją część.</p>
+      <a href="#" class="btn btn-sm js-phone-link">Zadzwoń teraz</a>
+    </div>
+  </div>
+
+  <section id="kategorie" aria-labelledby="kat-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Co mamy na magazynie</span>
+        <h2 id="kat-title">Popularne kategorie części</h2>
+        <p>Kliknij kategorię, aby przefiltrować listę przykładowych części poniżej. Nie widzisz swojej części? Zadzwoń – magazyn jest znacznie większy niż ta lista.</p>
+      </div>
+      <div class="cats">
+        <button type="button" class="cat" data-cat="Silnik i Osprzęt">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h3l2-3h6l2 3h3v8h-3l-2 2H9l-2-2H4z"/><path d="M1 11v4M23 11v4"/></svg></span>
+          <h3>Silnik i Osprzęt</h3>
+          <p>Uszczelki, tłoki, pierścienie, filtry, zawory, pompy wody.</p>
+          <span class="more">Pokaż części →</span>
+        </button>
+        <button type="button" class="cat" data-cat="Układ Elektryczny">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+          <h3>Układ Elektryczny</h3>
+          <p>Rozruszniki, alternatory, lampy, włączniki, przekaźniki.</p>
+          <span class="more">Pokaż części →</span>
+        </button>
+        <button type="button" class="cat" data-cat="Hydraulika i Hamulce">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 7 6 12a6 6 0 0 1-12 0c0-5 6-12 6-12z"/></svg></span>
+          <h3>Hydraulika i Hamulce</h3>
+          <p>Pompy, przewody, cylindry, rozdzielacze, szczęki hamulcowe.</p>
+          <span class="more">Pokaż części →</span>
+        </button>
+        <button type="button" class="cat" data-cat="Napęd, Skrzynia i Sprzęgło">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8 7 17M17 7l2.8-2.8"/></svg></span>
+          <h3>Napęd, Skrzynia i Sprzęgło</h3>
+          <p>Tarcze sprzęgła, łożyska, koła zębate, wałki, synchronizatory.</p>
+          <span class="more">Pokaż części →</span>
+        </button>
+        <button type="button" class="cat" data-cat="Nadwozie i Osprzęt">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span>
+          <h3>Nadwozie i Osprzęt</h3>
+          <p>Zaczepy, śruby, sworznie, elementy blacharskie, błotniki.</p>
+          <span class="more">Pokaż części →</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="czesci" aria-labelledby="czesci-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Przykładowa oferta</span>
+        <h2 id="czesci-title">Wyszukaj część</h2>
+        <p>Wpisz nazwę części, numer katalogowy lub model ciągnika. Stany są orientacyjne – dostępność zawsze potwierdzamy telefonicznie.</p>
+      </div>
+
+      <div class="filters" role="search">
+        <div class="field">
+          <label for="q">Szukaj po nazwie, numerze lub modelu</label>
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="np. pompa wody, C-360, uszczelka…" autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <label for="fcat">Kategoria</label>
+          <select id="fcat">
+            <option value="">Wszystkie kategorie</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fmodel">Ciągnik / maszyna</label>
+          <select id="fmodel">
+            <option value="">Wszystkie modele</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="result-info">
+        <span id="count" aria-live="polite"></span>
+        <button type="button" class="link-btn" id="reset">Wyczyść filtry</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Część</th>
+              <th scope="col">Nr kat.</th>
+              <th scope="col">Pasuje do</th>
+              <th scope="col">Kategoria</th>
+              <th scope="col">Stan</th>
+              <th scope="col">Cena</th>
+              <th scope="col"><span class="sr-only">Akcja</span></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" hidden>
+          <p><strong>Nie znaleziono tej części na liście.</strong></p>
+          <p>To tylko przykładowa część magazynu – <a href="#kontakt">zapytaj nas</a>, prawdopodobnie ją mamy!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" aria-labelledby="kontakt-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kontakt</span>
+        <h2 id="kontakt-title">Jak zamówić?</h2>
+        <p>Bez koszyka i płatności online – rozmawiamy bezpośrednio, sprawdzamy stan na magazynie i ustalamy cenę.</p>
+      </div>
+
+      <ol class="steps" style="list-style:none">
+        <li class="step">
+          <div class="num" aria-hidden="true">1</div>
+          <h3>Znajdź część lub zadzwoń</h3>
+          <p>Wyszukaj część na liście powyżej albo po prostu zadzwoń i powiedz, czego potrzebujesz.</p>
+        </li>
+        <li class="step">
+          <div class="num" aria-hidden="true">2</div>
+          <h3>Potwierdzamy dostępność i cenę</h3>
+          <p>Sprawdzamy stan na magazynie i oddzwaniamy z ceną. Cena do negocjacji!</p>
+        </li>
+        <li class="step">
+          <div class="num" aria-hidden="true">3</div>
+          <h3>Wysyłka lub odbiór osobisty</h3>
+          <p>Wysyłamy kurierem w całej Polsce lub zapraszamy po odbiór osobisty.</p>
+        </li>
+      </ol>
+
+      <div class="contact-grid">
+        <div class="call-card">
+          <h3>Najszybciej telefonicznie</h3>
+          <p>Zadzwoń lub napisz na WhatsApp – odpowiadamy szybko.</p>
+          <a href="#" class="phone js-phone-link js-phone-text">[Wpisz swój numer]</a>
+          <div class="btns">
+            <a href="#" class="btn btn-accent js-phone-link">Zadzwoń teraz</a>
+            <a href="#" class="btn btn-wa js-wa-link" target="_blank" rel="noopener">Napisz na WhatsApp</a>
+          </div>
+          <div class="hours">
+            <strong>Kontakt:</strong> pon.–pt. 8:00–18:00, sob. 8:00–14:00<br>
+            Wysyłka kurierem lub odbiór osobisty po wcześniejszym umówieniu.
+          </div>
+        </div>
+
+        <!-- <form class="inquiry" id="form" onsubmit="sendToWhatsApp(event)">
+  <h3 style="font-size:1.2rem">Formularz zapytania</h3>
+  
+  <div class="row2">
+    <div class="field">
+      <label for="f-name">Imię <span class="req" aria-hidden="true">*</span></label>
+      <input id="f-name" name="name" type="text" autocomplete="given-name" required>
+    </div>
+    <div class="field">
+      <label for="f-phone">Numer telefonu <span class="req" aria-hidden="true">*</span></label>
+      <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="np. 600 100 200" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="f-part">Nazwa części / Do jakiego ciągnika <span class="req" aria-hidden="true">*</span></label>
+    <input id="f-part" name="part" type="text" placeholder="np. pompa wody – Ursus C-360" required>
+  </div>
+
+  <div class="field">
+    <label for="f-msg">Treść wiadomości</label>
+    <textarea id="f-msg" name="message" placeholder="Ilość, numer katalogowy, preferowana forma dostawy…"></textarea>
+  </div>
+
+  <div class="form-msg" id="form-msg" role="status" aria-live="polite"></div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-green" style="width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+      Wyślij zapytanie przez WhatsApp
+    </button>
+  </div>
+
+  <p class="form-note">Kliknięcie przycisku otworzy aplikację WhatsApp z gotową wiadomością do nas. Pola oznaczone <span class="req">*</span> są wymagane.</p>
+</form> -->
+
+<!-- Skrypt obsługujący generowanie wiadomości do WhatsApp -->
+<!-- <script>
+  function sendToWhatsApp(event) {
+    event.preventDefault(); // Zatrzymuje standardowe przeładowanie strony
+
+    // WPISZ TUTAJ SWÓJ NUMER TELEFONU W FORMATCI MIĘDZYNARODOWEJ (np. 48600100200)
+    const phoneNumber = "48784549525"; 
+
+    // Pobieranie wartości z pól formularza
+    const name = document.getElementById('f-name').value;
+    const phone = document.getElementById('f-phone').value;
+    const part = document.getElementById('f-part').value;
+    const message = document.getElementById('f-msg').value;
+
+    // Tworzenie treści wiadomości
+    const text = `Dzień dobry, mam zapytanie ze strony:\n\n*Imię:* ${name}\n*Telefon klienta:* ${phone}\n*Szukana część:* ${part}\n*Dodatkowa wiadomość:* ${message}`;
+
+    // Kodowanie tekstu do formatu URL
+    const encodedText = encodeURIComponent(text);
+
+    // Otwarcie linku WhatsApp
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+    window.open(whatsappURL, '_blank');
+  }
+</script> -->
+
+        <form class="inquiry" id="form" novalidate>
+          <h3 style="font-size:1.2rem">Formularz zapytania</h3>
+          <div class="row2">
+            <div class="field">
+              <label for="f-name">Imię <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="f-phone">Numer telefonu <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="np. 600 100 200" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-part">Nazwa części / Do jakiego ciągnika <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-part" name="part" type="text" placeholder="np. pompa wody – Ursus C-360" required>
+          </div>
+          <div class="field">
+            <label for="f-msg">Treść wiadomości</label>
+            <textarea id="f-msg" name="message" placeholder="Ilość, numer katalogowy, preferowana forma dostawy…"></textarea>
+          </div>
+          <div class="form-msg" id="form-msg" role="status" aria-live="polite"></div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-green" data-via="wa">Wyślij przez WhatsApp</button>
+            <button type="submit" class="btn btn-accent" data-via="sms">Wyślij SMS</button>
+          </div>
+          <p class="form-note">Formularz otworzy WhatsApp lub SMS z gotową wiadomością – wystarczy ją wysłać. Pola oznaczone <span class="req">*</span> są wymagane.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div><strong>Edyta Sklep z częściami rolniczymi – Wyprzedaż prywatna</strong><br>Sprzedaż pozostałości magazynowych po zakończonej działalności.</div>
+    <div>Tel.: <a href="#" class="js-phone-link js-phone-text" style="color:var(--accent);font-weight:700;text-decoration:none">[Wpisz swój numer]</a><br>© <span id="year"></span> Edyta</div>
+  </div>
+</footer>
+
+<a href="#" class="btn btn-accent float-call js-phone-link" aria-label="Zadzwoń">Zadzwoń</a>
+
+<script>
+  /* ===== USTAWIENIA – wpisz swój numer telefonu ===== */
+  const PHONE_DISPLAY = "784 549 525";   // np. "600 100 200"
+  const PHONE_INTL    = "48784549525";                      // np. "48600100200" (z kierunkowym, bez + i spacji)
+
+  const PARTS = [
+    ["Komplet uszczelek głowicy","50-0022","Ursus C-360","Silnik i Osprzęt","ok",85],
+    ["Tłok z pierścieniami Ø102","40-0011","Ursus C-330","Silnik i Osprzęt","low",210],
+    ["Filtr oleju","FO-330","Ursus C-330","Silnik i Osprzęt","ok",25],
+    ["Filtr paliwa dokładnego oczyszczania","PP-845","Zetor 5211","Silnik i Osprzęt","ok",30],
+    ["Zawór ssący i wydechowy (kpl.)","50-0101","Ursus C-360","Silnik i Osprzęt","low",120],
+    ["Pompa wody","PW-25","T-25 Władimirec","Silnik i Osprzęt","ok",180],
+    ["Rozrusznik 12V","R-3302","Ursus C-330","Układ Elektryczny","low",450],
+    ["Alternator 14V 55A","A-7211","Zetor 7211","Układ Elektryczny","ok",520],
+    ["Lampa przednia (reflektor)","LP-360","Ursus C-360","Układ Elektryczny","ok",65],
+    ["Włącznik zespolony świateł","WZ-385","Ursus C-385","Układ Elektryczny","ok",45],
+    ["Świeca żarowa","SZ-25","T-25 Władimirec","Układ Elektryczny","ok",18],
+    ["Pompa hydrauliczna","PH-330","Ursus C-330","Hydraulika i Hamulce","low",690],
+    ["Przewód hydrauliczny 1/2\" 1m","PHD-12","Uniwersalny","Hydraulika i Hamulce","ok",40],
+    ["Cylinder hamulcowy","CH-360","Ursus C-360","Hydraulika i Hamulce","ok",95],
+    ["Szczęki hamulcowe (kpl.)","SH-5211","Zetor 5211","Hydraulika i Hamulce","ok",140],
+    ["Rozdzielacz hydrauliczny","RH-385","Ursus C-385","Hydraulika i Hamulce","low",780],
+    ["Tarcza sprzęgła","TS-330","Ursus C-330","Napęd, Skrzynia i Sprzęgło","ok",260],
+    ["Docisk sprzęgła","DS-360","Ursus C-360","Napęd, Skrzynia i Sprzęgło","low",390],
+    ["Łożysko wyciskowe","LW-6211","Zetor 7211","Napęd, Skrzynia i Sprzęgło","ok",75],
+    ["Koło zębate skrzyni biegów","KZ-25","T-25 Władimirec","Napęd, Skrzynia i Sprzęgło","low",230],
+    ["Synchronizator","SY-385","Ursus C-385","Napęd, Skrzynia i Sprzęgło","ok",310],
+    ["Zaczep transportowy","ZT-330","Ursus C-330","Nadwozie i Osprzęt","ok",150],
+    ["Sworzeń TUZ (kpl.)","ST-UNI","Uniwersalny","Nadwozie i Osprzęt","ok",35],
+    ["Błotnik tylny lewy","BT-360","Ursus C-360","Nadwozie i Osprzęt","low",280],
+    ["Śruby koła (kpl. 6 szt.)","SK-5211","Zetor 5211","Nadwozie i Osprzęt","ok",48],
+    ["Maska silnika","MS-25","T-25 Władimirec","Nadwozie i Osprzęt","low",350]
+  ];
+
+  const $ = (s, el=document) => el.querySelector(s);
+  const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+  const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ł/g,"l");
+  const esc = s => s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+  // Telefon
+  const telHref = PHONE_INTL ? "tel:+" + PHONE_INTL : "#kontakt";
+  const waBase  = PHONE_INTL ? "https://wa.me/" + PHONE_INTL : "";
+  $$(".js-phone-text").forEach(el => el.textContent = PHONE_DISPLAY);
+  $$(".js-phone-link").forEach(el => el.href = telHref);
+  $$(".js-wa-link").forEach(el => {
+    if (waBase) el.href = waBase + "?text=" + encodeURIComponent("Dzień dobry, pytam o część: ");
+    else { el.href = "#kontakt"; el.removeAttribute("target"); }
+  });
+  $("#year").textContent = new Date().getFullYear();
+
+  // Filtry
+  const q = $("#q"), fcat = $("#fcat"), fmodel = $("#fmodel");
+  [...new Set(PARTS.map(p => p[3]))].forEach(c => fcat.add(new Option(c, c)));
+  [...new Set(PARTS.map(p => p[2]))].sort((a,b)=>a.localeCompare(b,"pl")).forEach(m => fmodel.add(new Option(m, m)));
+
+  function render(){
+    const term = norm(q.value.trim());
+    const words = term.split(/\s+/).filter(Boolean);
+    const list = PARTS.filter(p => {
+      if (fcat.value && p[3] !== fcat.value) return false;
+      if (fmodel.value && p[2] !== fmodel.value) return false;
+      const hay = norm(p.slice(0,4).join(" "));
+      return words.every(w => hay.includes(w));
+    });
+    $("#rows").innerHTML = list.map(p => `
+      <tr>
+        <td class="name" data-label="Część">${esc(p[0])}</td>
+        <td data-label="Nr kat."><span class="code">${esc(p[1])}</span></td>
+        <td data-label="Pasuje do">${esc(p[2])}</td>
+        <td data-label="Kategoria">${esc(p[3])}</td>
+        <td data-label="Stan">${p[4]==="ok" ? '<span class="badge b-ok">Dostępne</span>' : '<span class="badge b-low">Ostatnie sztuki</span>'}</td>
+        <td data-label="Cena"><span class="price">${p[5]} zł<small>do negocjacji</small></span></td>
+        <td class="act"><button type="button" class="btn btn-green btn-sm" data-ask="${esc(p[0] + " (" + p[1] + ") – " + p[2])}">Zapytaj</button></td>
+      </tr>`).join("");
+    $("#empty").hidden = list.length > 0;
+    $("#count").textContent = `Znaleziono: ${list.length} z ${PARTS.length} pozycji`;
+  }
+  [q, fcat, fmodel].forEach(el => el.addEventListener("input", render));
+  $("#reset").addEventListener("click", () => { q.value=""; fcat.value=""; fmodel.value=""; render(); q.focus(); });
+
+  $$(".cat").forEach(btn => btn.addEventListener("click", () => {
+    fcat.value = btn.dataset.cat; q.value = ""; render();
+    $("#czesci").scrollIntoView({behavior:"smooth"});
+  }));
+
+  $("#rows").addEventListener("click", e => {
+    const b = e.target.closest("[data-ask]"); if (!b) return;
+    $("#f-part").value = b.dataset.ask;
+    $("#kontakt").scrollIntoView({behavior:"smooth"});
+    setTimeout(() => $("#f-name").focus({preventScroll:true}), 500);
+  });
+
+  // Formularz
+  const form = $("#form"), msg = $("#form-msg");
+  let via = "wa";
+  $$("button[data-via]", form).forEach(b => b.addEventListener("click", () => via = b.dataset.via));
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form));
+    const missing = ["name","phone","part"].filter(k => !String(d[k]||"").trim());
+    if (missing.length){
+      msg.className = "form-msg err";
+      msg.textContent = "Uzupełnij wymagane pola: imię, numer telefonu oraz nazwę części.";
+      form.querySelector(`[name="${missing[0]}"]`).focus();
+      return;
+    }
+    if (!/^[+\d\s()-]{9,}$/.test(d.phone.trim())){
+      msg.className = "form-msg err";
+      msg.textContent = "Podaj poprawny numer telefonu (min. 9 cyfr).";
+      $("#f-phone").focus();
+      return;
+    }
+    const text = `Zapytanie o część – wyprzedaż Edyta\nImię: ${d.name}\nTelefon: ${d.phone}\nCzęść / ciągnik: ${d.part}` + (d.message.trim() ? `\nWiadomość: ${d.message}` : "");
+    if (!PHONE_INTL){
+      msg.className = "form-msg err";
+      msg.textContent = "Numer kontaktowy nie został jeszcze ustawiony przez właściciela strony.";
+      return;
+    }
+    const url = via === "wa"
+      ? `${waBase}?text=${encodeURIComponent(text)}`
+      : `sms:+${PHONE_INTL}?&body=${encodeURIComponent(text)}`;
+    window.open(url, via === "wa" ? "_blank" : "_self");
+    msg.className = "form-msg ok";
+    msg.textContent = "Dziękujemy! Otworzyliśmy wiadomość z Twoim zapytaniem – wyślij ją, a oddzwonimy z ceną.";
+  });
+
+  render();
+</script>
+</body>
+</html>
